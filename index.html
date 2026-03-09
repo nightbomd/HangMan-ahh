@@ -16,36 +16,42 @@
 <body>
     
 <main class="p-5">
-    <div class="container  d-flex flex-column align-items-center justify-content-center">
+    <img class="lightbulb" src="Images/Group 4.png">
+    <div class="container-fluid  d-flex flex-column align-items-center justify-content-center">
 
         <div class="img-placeholder"></div>
 
         <div class="wrapper d-flex flex-row align-items-center justify-content-between">
 
-            <div class="letter-box"></div>
+            <div class="letter-box text-center p-3  col-3" id="letter-box"></div>
 
-            <div class="Nar-text">
-                <p id="narText">Hey guys its little jimmy</p>
-                <div class="shadow"></div>
+            <div class="Nar-text col-5">
+                <p id="narText" class="fs-2"></p>
+                <div class="mb-5"></div>
+                <div class="mb-5"></div>
+                <div class="mb-5"></div>
+                <div class="mb-5"></div>
+                <div class="shadow col-8"></div>
             </div>
 
-            <div class="hang-man">
-                <h1>Little Jimmy</h1>
-                <div class="little-jimmy">
-                    <img class="jimmy-img" src="jimmy.png">
+            <div class="hang-man col-3">
+                <h1 class="text-center">Little Jimmy</h1>
+                <div class="little-jimmy m-auto">
+                    <img class="jimmy-img m-auto" src="Images/jimmy.png">
                 </div>
-                <div class="shadow-2 mt-3"></div>
+              
             </div>
 
         </div>
 
     </div>
 
-    <div class="word-box m-auto mt-5"></div>
+    <div class="word-box m-auto mt-5 col-sm-12 col-md-8 col-lg-8 "></div>
 </main>
 
 
     <!-- Bootstrap JavaScript Libraries -->
+     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
