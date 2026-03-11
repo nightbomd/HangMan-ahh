@@ -52,6 +52,19 @@ body {
 
 
 }
+.underscore {
+    width: 100px;
+    margin: 10px;
+    display: inline-block;
+    height: 50px;
+    border-bottom: 5px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    opacity: 0;
+    transform: scale(0.5);
+}
 .letter-button {
     width: 78px;
     height: 80px;
@@ -89,13 +102,31 @@ body {
  
  
 }
-
+.flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: red;
+    opacity: 0;
+    pointer-events: none; /* so it doesn’t block clicks */
+    transition: opacity 0.2s ease; /* smooth fade */
+    z-index: 9999; /* above everything */
+}
+.bounce-in {
+    animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+}
 .word-box {
     height: 266px;
     border: 4px solid black;
     border-radius: 10px;
     box-shadow: 10px 10px 0px #676363, 0 0 0 1px #bfb6b6;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
+    display: flex;
+    justify-content: center;
+        align-items: center;
+        gap: 20px;
 }
 .word-box:hover {
     transform: translate(-3px, -3px);
@@ -106,4 +137,37 @@ body {
      0%   { opacity: 1; }
     50%  { opacity: 0.5; }
     100% { opacity: 1; }
+}
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+.flash-red {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none; /* clicks pass through */
+    z-index: 9999;
+    animation: fadeRed 0.3s ease forwards; /* run the animation once */
+}
+
+@keyframes fadeRed {
+    0% {
+        background-color: rgba(255, 0, 0, 0.5);
+    }
+    100% {
+        background-color: rgba(255, 0, 0, 0);
+    }
 }
