@@ -2,12 +2,19 @@ const words = ["JIMMY", "HANGMAN", "PROGRAMMING", "DEVELOPER", "COMPUTER"];
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let selectedWord = "";
 let underScores = [];
+let buttons = [];
 let guessedLetters = [];
 let lives = 6;
 
 // prevents merging texts when clicking multiple times quickly
 let nartTimeOuts = [];
 let jimmyTimeOuts = [];
+
+const guessBtn = document.getElementById("guess-btn");
+const submitBtn = document.getElementById("submit-guess-btn");
+const guessInput = document.getElementById("guess-word-input");
+
+
 
 function makeButtons() {
     const letterBox = document.getElementById("letter-box");
@@ -24,6 +31,7 @@ function makeButtons() {
         });
 
         letterBox.appendChild(button);
+        buttons.push(button);
     }
 }
 
@@ -98,6 +106,10 @@ function doTheGame(letter) {
 
     guessedLetters.push(letter);
 
+    if (guessedLetters.length > 4) {
+        guessBtn.style.display = "block";
+    }
+
     let found = false;
 
     for (let i = 0; i < selectedWord.length; i++) {
@@ -128,8 +140,10 @@ function doTheGame(letter) {
         underscore.textContent === selectedWord[index])) {
 
         updateNarrative("Congratulations! You've guessed the word!");
+        updateJimmyText("Yay!");
+        gamewon=true;
     }
-
+    
     if (lives === 0) {
         updateNarrative(`Game Over! The word was: ${selectedWord}`);
     }
@@ -145,5 +159,53 @@ function updateUi() {
         livesText.textContent = "❤️ ".repeat(lives); // works now
 
     });
+}
+guessBtn.addEventListener("click", () => {
+    submitBtn.style.display = "block";
+    guessInput.style.display = "block";
+
+});
+submitBtn.addEventListener("click", () => {
+    const guess = guessInput.value.toUpperCase();
+
+    if (guess === selectedWord) {
+        underScores.forEach((underscore, index) => {
+            underscore.textContent = selectedWord[index];
+        });
+
+        updateNarrative("Congratulations! You've guessed the word!");
+        updateJimmyText("Yay!");
+        submitBtn.style.display = "none";
+        guessInput.style.display = "none";
+        guessBtn.style.display = "none";
+
+    } else {
+        lives--;
+        guessBtn.style.display = "none";
+        submitBtn.style.display = "none";
+        guessInput.style.display = "none";
+        updateNarrative(`nope. ${lives} remaining`);
+        updateJimmyText("dude bro stop");
+        flashRed();
+    }
+});
+// toggle dark mode in js
+function invertColors() {
+    document.body.classList.toggle("dark");
+    setTimeout(() => {
+        underScores.forEach(el => {
+            el.classList.toggle("underscore-dark");
+        });
+    }, 150);
+
+    setTimeout(() => {
+        buttons.forEach(el => {
+            el.classList.toggle("letter-button-dark");
+        });
+    }, 150);
+
+    setTimeout(() => {
+        document.getElementById("shadow").classList.toggle("shadow-light");
+    }, 150);
 }
 updateUi();

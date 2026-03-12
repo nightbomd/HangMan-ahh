@@ -16,7 +16,7 @@
 <body>
   
 <main class="p-5">
-    <img class="lightbulb" src="Images/Group 4.png">
+    <img class="lightbulb" onClick="invertColors()" src="Images/Group 4.png">
     <div class="container-fluid  d-flex flex-column align-items-center justify-content-center">
 
         <div class="img-placeholder"></div>
@@ -31,7 +31,7 @@
                 <div class="mb-5"></div>
                 <div class="mb-5"></div>
                 <div class="mb-5"></div>
-                <div class="shadow col-8"></div>
+                <div id="shadow" class="shadow col-8"></div>
             </div>
 
             <div class="hang-man col-3">
@@ -48,6 +48,13 @@
     </div>
 
     <div class="word-box m-auto mt-5 col-sm-12 col-md-8 col-lg-8 p-3 " id="word-box"></div>
+    <div id="guess-input">
+        <button id="guess-btn" class="btn btn-light fs-2 p-3">Guess?</button>
+    </div>
+    <div id="typeWord">
+        <input type="text" id="guess-word-input" class="form-control form-control-lg" placeholder="Type your guess here...">
+        <button id="submit-guess-btn" class="btn btn-light p-3 fs-3 mt-3">Submit Guess</button>
+    </div>
 </main>
 <div id="flash" class="flash-red"></div>
 
