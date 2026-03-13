@@ -11,21 +11,23 @@ body {
     height: 100vh;
     background: white;
     color: black;
-    transition:  0.5s ease, color 0.5s ease;
+    transition: 0.5s ease, color 0.5s ease;
 }
+
 body.dark {
     background: black;
     color: white;
 }
+
 .container {
-  height: auto;
-  border: 2px solid red;
+    height: auto;
+    border: 2px solid red;
 }
 
 .wrapper {
     gap: 50px;
     width: 100%;
-   
+
 }
 
 .letter-box {
@@ -34,31 +36,35 @@ body.dark {
     border-radius: 10px;
     box-shadow: 7px 7px 0px #676363, 0 0 0 1px #bfb6b6;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
-    
-}
-.letter-box:hover {
-    transform: translate(-3px, -3px);
-        box-shadow: 10px 10px 0px #111, 0 0 0 1px #111;
 
 }
+
+.letter-box:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 10px 10px 0px #111, 0 0 0 1px #111;
+
+}
+
 .lightbulb {
     position: absolute;
     top: 10px;
     left: 50%;
     width: 75px;
     height: 100px;
-     transform: translateX(-50%);
+    transform: translateX(-50%);
 }
+
 .Nar-text {
     display: flex;
     flex-direction: column;
     align-items: space-between;
     justify-content: space-between;
     height: 400px;
-    
+
 
 
 }
+
 .underscore {
     width: 100px;
     margin: 10px;
@@ -72,6 +78,7 @@ body.dark {
     opacity: 0;
     transform: scale(0.5);
 }
+
 .underscore-dark {
     width: 100px;
     margin: 10px;
@@ -85,11 +92,13 @@ body.dark {
     opacity: 0;
     transform: scale(0.5);
 }
+
 #guess-input {
     position: absolute;
     left: 87.5%;
     top: 75%;
 }
+
 #guess-btn {
     border: 4px solid black;
     border-radius: 10px;
@@ -97,6 +106,14 @@ body.dark {
     transition: transform 0.15s ease, box-shadow 0.15s ease;
     display: none;
 }
+#new-game-btn {
+    border: 4px solid black;
+    border-radius: 10px;
+    box-shadow: 7px 7px 0px #676363, 0 0 0 1px #bfb6b6;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    display: none;
+}
+
 #submit-guess-btn {
     border: 4px solid black;
     border-radius: 10px;
@@ -104,34 +121,46 @@ body.dark {
     transition: transform 0.15s ease, box-shadow 0.15s ease;
     display: none;
 }
+
 #guess-btn:hover {
     transform: translate(-3px, -3px);
     box-shadow: 10px 10px 0px #111, 0 0 0 1px #111;
 }
+
 #typeWord {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
-    position: absolute;
-    left: 40%;
+    position: fixed;
     top: 50%;
-     border: 4px solid black;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 25%;
+
+    padding: 12px 16px;
+    border: 4px solid black;
     border-radius: 10px;
+    background: white;
+
     box-shadow: 7px 7px 0px #676363, 0 0 0 1px #bfb6b6;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+
 #typeWord:hover {
-    transform: translate(-3px, -3px);
+    transform: translate(-50%, -50%) translate(-3px, -3px);
     box-shadow: 10px 10px 0px #111, 0 0 0 1px #111;
 }
+
 #guess-word-input {
     border: none;
     outline: none;
     display: none;
     font-size: 1.5rem;
-     padding: 10px;
+    padding: 10px;
+    width: 100%;
 }
 
 .letter-button {
@@ -141,10 +170,11 @@ body.dark {
     border-radius: 10px;
     box-shadow: 7px 7px 0px #676363, 0 0 0 1px #bfb6b6;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
-  overflow: hidden;
-  background-color: #fff;
-  font-size: 2rem;
+    overflow: hidden;
+    background-color: #fff;
+    font-size: 2rem;
 }
+
 .letter-button-dark {
     width: 20%;
     height: 16%;
@@ -152,18 +182,20 @@ body.dark {
     border-radius: 10px;
     box-shadow: 7px 7px 0px #676363, 0 0 0 1px #bfb6b6;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
-  overflow: hidden;
-  background-color: #000000;
-  font-size: 2rem;
-  color: white;
+    overflow: hidden;
+    background-color: #000000;
+    font-size: 2rem;
+    color: white;
 }
+
 .letter-button:hover {
     transform: translate(-3px, -3px);
     box-shadow: 10px 10px 0px #111, 0 0 0 1px #111;
 }
+
 .shadow {
     height: 60px;
-    background: radial-gradient(ellipse at center, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
     border-radius: 50%;
     box-shadow: none;
     margin: auto;
@@ -171,9 +203,10 @@ body.dark {
     transform: scaleX(1.4);
     animation: shadowFadeColors 10s ease-in-out infinite;
 }
+
 .shadow-light {
     height: 60px;
-    background: radial-gradient(ellipse at center, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
     border-radius: 50%;
     box-shadow: none;
     margin: auto;
@@ -186,10 +219,9 @@ body.dark {
     width: 274px;
     height: 389px;
 }
-.little-jimmy {
- 
- 
-}
+
+.little-jimmy {}
+
 .flash {
     position: fixed;
     top: 0;
@@ -198,13 +230,18 @@ body.dark {
     height: 100vh;
     background-color: red;
     opacity: 0;
-    pointer-events: none; /* so it doesn’t block clicks */
-    transition: opacity 0.2s ease; /* smooth fade */
-    z-index: 9999; /* above everything */
+    pointer-events: none;
+    /* so it doesn’t block clicks */
+    transition: opacity 0.2s ease;
+    /* smooth fade */
+    z-index: 9999;
+    /* above everything */
 }
+
 .bounce-in {
     animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
 }
+
 .word-box {
     height: 266px;
     border: 4px solid black;
@@ -213,48 +250,64 @@ body.dark {
     transition: transform 0.15s ease, box-shadow 0.15s ease;
     display: flex;
     justify-content: center;
-        align-items: center;
-        gap: 20px;
+    align-items: center;
+    gap: 20px;
 }
+
 .word-box:hover {
     transform: translate(-3px, -3px);
     box-shadow: 10px 10px 0px #111, 0 0 0 1px #111;
 }
 
 @keyframes shadowFadeColors {
-     0%   { opacity: 1; }
-    50%  { opacity: 0.5; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
+
 @keyframes bounceIn {
     0% {
         transform: scale(0.5);
         opacity: 0;
     }
+
     50% {
         transform: scale(1.2);
         opacity: 1;
     }
+
     100% {
         transform: scale(1);
         opacity: 1;
     }
 }
+
 .flash-red {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    pointer-events: none; /* clicks pass through */
+    pointer-events: none;
+    /* clicks pass through */
     z-index: 9999;
-    animation: fadeRed 0.3s ease forwards; /* run the animation once */
+    animation: fadeRed 0.3s ease forwards;
+    /* run the animation once */
 }
 
 @keyframes fadeRed {
     0% {
         background-color: rgba(255, 0, 0, 0.5);
     }
+
     100% {
         background-color: rgba(255, 0, 0, 0);
     }

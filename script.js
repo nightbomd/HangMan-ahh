@@ -1,53 +1,56 @@
-const words = ["JIMMY", "HANGMAN", "PROGRAMMING", "DEVELOPER", "COMPUTER"];
+const mediumWords = ["JIMMY", "BANANA", "COMPUTER", "PYTHON", "HANGMAN", "DEVELOPER", "JAVASCRIPT", "PROGRAMMING", "ALGORITHM", "FUNCTION"];
+const easyWords = ["CAT", "DOG", "CAR", "TREE", "BOOK", "HOUSE", "BALL", "CUP", "PHONE", "TABLE"];
+const hardWords = ["SOLLOQUY", "CONSEQUENTIALLY", "SHADENFREUDE", "UNCHARACTERISTICALLY", "INCOMPREHENSIBILITY", "MISUNDERSTANDING", "PHILANTHROPIC", "RECOMMENDATION", "SUBSTANTIATION"];
+const wordLists = [mediumWords, easyWords, hardWords];
+ 
+let words = wordLists[Math.floor(Math.random() * wordLists.length)];
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let selectedWord = "";
 let underScores = [];
 let buttons = [];
 let guessedLetters = [];
 let lives = 6;
-
+let gameWon = false;
+ 
 // prevents merging texts when clicking multiple times quickly
 let nartTimeOuts = [];
 let jimmyTimeOuts = [];
-
+ 
 const guessBtn = document.getElementById("guess-btn");
 const submitBtn = document.getElementById("submit-guess-btn");
 const guessInput = document.getElementById("guess-word-input");
-
-
-
+const newGameBtn = document.getElementById("new-game-btn");
+ 
+ 
+ 
 function makeButtons() {
     const letterBox = document.getElementById("letter-box");
-
+ 
     for (let i = 0; i < alphabet.length; i++) {
         const button = document.createElement("button");
-
+ 
         button.textContent = alphabet[i];
         button.classList.add("letter-button");
-
+ 
         button.addEventListener("click", () => {
             button.disabled = true;
             doTheGame(button.textContent);
         });
-
+ 
         letterBox.appendChild(button);
         buttons.push(button);
     }
 }
-
+ 
 function updateNarrative(text) {
     const narText = document.getElementById("narText");
-
-    // Clear any existing text and timeouts
+ 
     narText.textContent = "";
     nartTimeOuts.forEach(timeout => clearTimeout(timeout));
     nartTimeOuts = [];
-
-
-    narText.textContent = "";
-
+ 
     const letters = text.split("");
-
+ 
     letters.forEach((char, index) => {
         const t = setTimeout(() => {
             narText.textContent += char;
@@ -55,16 +58,17 @@ function updateNarrative(text) {
         nartTimeOuts.push(t);
     });
 }
+ 
 function updateJimmyText(text) {
     const jimmyText = document.getElementById("jimmy-text");
-
+ 
     jimmyTimeOuts.forEach(timeout => clearTimeout(timeout));
     jimmyTimeOuts = [];
-
+ 
     jimmyText.textContent = "";
-
+ 
     const letters = text.split("");
-
+ 
     letters.forEach((char, index) => {
         const t = setTimeout(() => {
             jimmyText.textContent += char;
@@ -72,123 +76,144 @@ function updateJimmyText(text) {
         jimmyTimeOuts.push(t);
     });
 }
+ 
 function makeUnderscores() {
     selectedWord = words[Math.floor(Math.random() * words.length)];
     underScores = [];
-
+ 
     for (let i = 0; i < selectedWord.length; i++) {
         const underscore = document.createElement("div");
         underscore.classList.add("underscore");
         setTimeout(() => {
             underscore.classList.add("bounce-in");
         }, i * 150);
-
+ 
         document.getElementById("word-box").appendChild(underscore);
         underScores.push(underscore);
     }
 }
+ 
 function flashRed() {
     const flash = document.getElementById("flash");
-
-    // remove class if already there to re-trigger
+ 
     flash.classList.remove("flash-red");
-
-    // force reflow so the browser registers the removal
     void flash.offsetWidth;
-
     flash.classList.add("flash-red");
 }
-
+ 
+function endGame() {
+    buttons.forEach(button => {
+        button.disabled = true;
+    });
+    newGameBtn.style.display = "block";
+    guessBtn.style.display = "none";
+    submitBtn.style.display = "none";
+    guessInput.style.display = "none";
+    document.getElementById("typeWord").style.display = "none";
+}
+ 
 function doTheGame(letter) {
-
-
+    if (gameWon || lives === 0) return;
     if (guessedLetters.includes(letter)) return;
-
+ 
     guessedLetters.push(letter);
-
+ 
     if (guessedLetters.length > 4) {
         guessBtn.style.display = "block";
+        guessBtn.classList.add("bounce-in");
     }
-
+ 
     let found = false;
-
+ 
     for (let i = 0; i < selectedWord.length; i++) {
-
         if (letter === selectedWord[i]) {
             underScores[i].textContent = letter;
             found = true;
         }
     }
+ 
     if (found) {
         updateNarrative("Good guess!");
         updateJimmyText("Yay!");
-    }
-
-    if (!found) {
+    } else {
         lives--;
         updateNarrative(`Wrong guess! Lives remaining: ${lives}`);
         updateJimmyText("Ow why'd you do that?");
         flashRed();
-        setTimeout(() => {
-            updateJimmyText("freaking douchebag...");
-        }, 3000);
-        document.getElementById("lives").textContent = "❤️ ".repeat(lives);
-
+        document.getElementById("lives").textContent = "❤️ ".repeat(Math.max(lives, 0));
+ 
+        if (lives > 0) {
+            setTimeout(() => {
+                updateJimmyText("lock in unc");
+            }, 3000);
+        }
     }
-
+ 
     if (underScores.every((underscore, index) =>
         underscore.textContent === selectedWord[index])) {
-
         updateNarrative("Congratulations! You've guessed the word!");
-        updateJimmyText("Yay!");
-        gamewon=true;
+        updateJimmyText("Yay! We won!");
+        gameWon = true;
+        endGame();
+        return;
     }
-    
+ 
     if (lives === 0) {
         updateNarrative(`Game Over! The word was: ${selectedWord}`);
+        updateJimmyText("rip...");
+        endGame();
     }
-
 }
+ 
 function updateUi() {
-    window.addEventListener("load", () => {
-        updateNarrative("Hey guys its little jimmy");
-        updateJimmyText("hi guys");
-        makeButtons();
-        makeUnderscores();
-        const livesText = document.getElementById("lives");
-        livesText.textContent = "❤️ ".repeat(lives); // works now
-
-    });
+    updateNarrative("Hey guys its little jimmy");
+    updateJimmyText("hi guys");
+    makeButtons();
+    makeUnderscores();
+    const livesText = document.getElementById("lives");
+    livesText.textContent = "❤️ ".repeat(lives);
 }
+ 
 guessBtn.addEventListener("click", () => {
     submitBtn.style.display = "block";
     guessInput.style.display = "block";
-
+    document.getElementById("typeWord").style.display = "block";
+    submitBtn.classList.add("bounce-in");
+    guessInput.classList.add("bounce-in");
 });
+ 
 submitBtn.addEventListener("click", () => {
     const guess = guessInput.value.toUpperCase();
-
+    guessInput.value = "";
+ 
     if (guess === selectedWord) {
         underScores.forEach((underscore, index) => {
             underscore.textContent = selectedWord[index];
         });
-
         updateNarrative("Congratulations! You've guessed the word!");
-        updateJimmyText("Yay!");
-        submitBtn.style.display = "none";
-        guessInput.style.display = "none";
-        guessBtn.style.display = "none";
-
+        updateJimmyText("Yay! We won!");
+        gameWon = true;
+        endGame();
     } else {
         lives--;
-        guessBtn.style.display = "none";
-        submitBtn.style.display = "none";
-        guessInput.style.display = "none";
-        updateNarrative(`nope. ${lives} remaining`);
-        updateJimmyText("dude bro stop");
+        document.getElementById("lives").textContent = "❤️ ".repeat(Math.max(lives, 0));
         flashRed();
+ 
+        if (lives === 0) {
+            updateNarrative(`Game Over! The word was: ${selectedWord}`);
+            updateJimmyText("rip...");
+        } else {
+            updateNarrative(`Nope! ${lives} lives remaining`);
+            updateJimmyText("dude bro stop");
+             submitBtn.style.display = "none";
+            guessInput.style.display = "none";
+            document.getElementById("typeWord").style.display = "none";
+        }
     }
+ 
+    
 });
+ 
 // toggle dark mode in js
 function invertColors() {
     document.body.classList.toggle("dark");
@@ -197,15 +222,39 @@ function invertColors() {
             el.classList.toggle("underscore-dark");
         });
     }, 150);
-
+ 
     setTimeout(() => {
         buttons.forEach(el => {
             el.classList.toggle("letter-button-dark");
         });
     }, 150);
-
+ 
     setTimeout(() => {
         document.getElementById("shadow").classList.toggle("shadow-light");
     }, 150);
 }
+ 
+newGameBtn.addEventListener("click", () => {
+    selectedWord = "";
+    underScores = [];
+    guessedLetters = [];
+    lives = 6;
+    gameWon = false;
+ 
+    words = wordLists[Math.floor(Math.random() * wordLists.length)];
+ 
+    document.getElementById("word-box").innerHTML = "";
+    document.getElementById("letter-box").innerHTML = "";
+    buttons = [];
+ 
+    newGameBtn.style.display = "none";
+    submitBtn.style.display = "none";
+    guessInput.style.display = "none";
+    guessBtn.style.display = "none";
+    document.getElementById("typeWord").style.display = "none";
+ 
+    updateUi();
+});
+ 
+ 
 updateUi();
