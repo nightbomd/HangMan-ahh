@@ -2,14 +2,16 @@ const mediumWords = ["JIMMY", "BANANA", "COMPUTER", "PYTHON", "HANGMAN", "DEVELO
 const easyWords = ["CAT", "DOG", "CAR", "TREE", "BOOK", "HOUSE", "BALL", "CUP", "PHONE", "TABLE"];
 const hardWords = ["SOLLOQUY", "CONSEQUENTIALLY", "SHADENFREUDE", "UNCHARACTERISTICALLY", "INCOMPREHENSIBILITY", "MISUNDERSTANDING", "PHILANTHROPIC", "RECOMMENDATION", "SUBSTANTIATION"];
 const wordLists = [mediumWords, easyWords, hardWords];
- 
+const healthBar = document.getElementById("bar-inner"); 
+
 let words = wordLists[Math.floor(Math.random() * wordLists.length)];
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 let selectedWord = "";
 let underScores = [];
 let buttons = [];
 let guessedLetters = [];
-let lives = 6;
+let lives = 8;
+let maxLives = 8
 let gameWon = false;
  
 // prevents merging texts when clicking multiple times quickly
@@ -100,6 +102,17 @@ function flashRed() {
     void flash.offsetWidth;
     flash.classList.add("flash-red");
 }
+function animateHealthBar() {
+    healthBar.classList.remove("hit-effect");
+    void healthBar.offsetWidth;
+    healthBar.classList.add("hit-effect");
+
+}
+function playSound(file) {
+    const audio = new Audio(file);
+    audio.volume = 0.8;
+    audio.play();
+}
  
 function endGame() {
     buttons.forEach(button => {
@@ -137,10 +150,15 @@ function doTheGame(letter) {
         updateJimmyText("Yay!");
     } else {
         lives--;
+        playSound("slap.mp3")
+        animateHealthBar()
+        setTimeout(() => {
+            healthBar.style.width = (lives / maxLives) * 100 + "%"
+        }, 200);
         updateNarrative(`Wrong guess! Lives remaining: ${lives}`);
         updateJimmyText("Ow why'd you do that?");
         flashRed();
-        document.getElementById("lives").textContent = "❤️ ".repeat(Math.max(lives, 0));
+       
  
         if (lives > 0) {
             setTimeout(() => {
@@ -151,6 +169,7 @@ function doTheGame(letter) {
  
     if (underScores.every((underscore, index) =>
         underscore.textContent === selectedWord[index])) {
+            playSound("win.mp3")
         updateNarrative("Congratulations! You've guessed the word!");
         updateJimmyText("Yay! We won!");
         gameWon = true;
@@ -170,8 +189,7 @@ function updateUi() {
     updateJimmyText("hi guys");
     makeButtons();
     makeUnderscores();
-    const livesText = document.getElementById("lives");
-    livesText.textContent = "❤️ ".repeat(lives);
+    healthBar.style.width = (lives / maxLives) * 100 + "%"
 }
  
 guessBtn.addEventListener("click", () => {
@@ -190,13 +208,18 @@ submitBtn.addEventListener("click", () => {
         underScores.forEach((underscore, index) => {
             underscore.textContent = selectedWord[index];
         });
+        playSound("win.mp3")
         updateNarrative("Congratulations! You've guessed the word!");
         updateJimmyText("Yay! We won!");
         gameWon = true;
         endGame();
     } else {
         lives--;
-        document.getElementById("lives").textContent = "❤️ ".repeat(Math.max(lives, 0));
+        animateHealthBar()
+        playSound("slap.mp3")
+         setTimeout(() => {
+            healthBar.style.width = (lives / maxLives) * 100 + "%"
+        }, 200);
         flashRed();
  
         if (lives === 0) {
@@ -238,7 +261,7 @@ newGameBtn.addEventListener("click", () => {
     selectedWord = "";
     underScores = [];
     guessedLetters = [];
-    lives = 6;
+    lives = 8;
     gameWon = false;
  
     words = wordLists[Math.floor(Math.random() * wordLists.length)];
