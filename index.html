@@ -14,55 +14,59 @@
 </head>
 
 <body>
-  
-<main class="p-5">
-    <img class="lightbulb" onClick="invertColors()" src="Images/Group 4.png">
-    <div class="container-fluid  d-flex flex-column align-items-center justify-content-center">
+    <div class="d-flex align-items-center g-3 difficulty">
+        <p class="fs-4" id="difficulty"></p>
+        <button id="difficulty-btn">Change Difficulty</button>
+    </div>
+    <main class="p-5">
+        <img class="lightbulb" onClick="invertColors()" src="Images/Group 4.png">
+        <div class="container-fluid  d-flex flex-column align-items-center justify-content-center">
 
-        <div class="img-placeholder"></div>
+            <div class="img-placeholder"></div>
 
-        <div class="wrapper d-flex flex-row align-items-center justify-content-between">
+            <div class="wrapper mb-2 d-flex flex-row align-items-center justify-content-between">
 
-            <div class="letter-box text-center p-3  col-3" id="letter-box"></div>
+                <div class="letter-box text-center p-3  col-3" id="letter-box"></div>
 
-            <div class="Nar-text col-5">
-                <p id="narText" class="fs-2"></p>
-                <div class="mb-5"></div>
-                <div class="mb-5"></div>
-                <div class="mb-5"></div>
-                <div class="mb-5"></div>
-                <div id="shadow" class="shadow col-8"></div>
-            </div>
-
-            <div class="hang-man col-3">
-                <p class="text-center fs-1" id="jimmy-text"></p>
-                   <div class="bar m-auto border-round col-5 mb-5" id="bar">
-                    <div id="bar-inner"></div>
+                <div class="Nar-text col-5">
+                    <p id="narText" class="fs-2"></p>
+                    <div class="mb-5"></div>
+                    <div class="mb-5"></div>
+                    <div class="mb-5"></div>
+                    <div class="mb-5"></div>
+                    <div id="shadow" class="shadow col-8"></div>
                 </div>
-                <div class="little-jimmy m-auto">
-                    <img class="jimmy-img m-auto" src="Images/jimmy.png">
+
+                <div class="hang-man col-3">
+                    <p class="text-center fs-2 mb-3" id="jimmy-text"></p>
+                    <div class="bar m-auto border-round col-5 mb-5" id="bar">
+                        <div id="bar-inner"></div>
+                    </div>
+                    <div class="little-jimmy m-auto">
+                        <img class="jimmy-img m-auto" src="Images/jimmy.png">
+                    </div>
+
                 </div>
-              
+
             </div>
 
         </div>
 
-    </div>
-
-    <div class="word-box m-auto mt-5 col-sm-12 col-md-8 col-lg-8 p-3 " id="word-box"></div>
-    <div id="guess-input">
-        <button id="guess-btn" class="btn btn-light fs-2 p-3">Guess?</button>
-        <button id="new-game-btn" class="btn btn-light p-3 fs-3 mt-3">New Game?</button>
-    </div>
-    <div id="typeWord">
-        <input type="text" id="guess-word-input" class="form-control form-control-lg" placeholder="Type your guess here...">
-        <button id="submit-guess-btn" class="btn btn-light p-3 fs-3 mt-3">Submit Guess</button>
-    </div>
-</main>
-<div id="flash" class="flash-red"></div>
+        <div class="word-box m-auto mt-5 col-sm-12 col-md-8 col-lg-8 p-3 " id="word-box"></div>
+        <div id="guess-input">
+            <button id="guess-btn" class="btn btn-light fs-2 p-3">Guess?</button>
+            <button id="new-game-btn" class="btn btn-light p-3 fs-3 mt-3">New Game?</button>
+        </div>
+        <div id="typeWord">
+            <input type="text" id="guess-word-input" class="form-control form-control-lg"
+                placeholder="Type your guess here...">
+            <button id="submit-guess-btn" class="btn btn-light p-3 fs-3 mt-3">Submit Guess</button>
+        </div>
+    </main>
+    <div id="flash" class="flash-red"></div>
 
     <!-- Bootstrap JavaScript Libraries -->
-     <script src="script.js"></script>
+    <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>

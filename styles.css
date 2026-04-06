@@ -12,6 +12,7 @@ body {
     background: white;
     color: black;
     transition: 0.5s ease, color 0.5s ease;
+   
 }
 
 body.dark {
@@ -20,37 +21,35 @@ body.dark {
 }
 
 .container {
-    height: auto;
+    height: clamp(400px, 20vh, 600px);
     border: 2px solid red;
 }
 
 .wrapper {
-    gap: 50px;
+    gap: clamp(20px, 3vw, 50px);
     width: 100%;
-
+    height: clamp(400px, 22vh, 650px);
 }
 
 .letter-box {
-    height: 550px;
+    height: clamp(300px, 50vh, 550px);
     border: 4px solid black;
     border-radius: 10px;
     box-shadow: 7px 7px 0px #676363, 0 0 0 1px #bfb6b6;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
-
 }
 
 .letter-box:hover {
     transform: translate(-3px, -3px);
     box-shadow: 10px 10px 0px #111, 0 0 0 1px #111;
-
 }
 
 .lightbulb {
     position: absolute;
     top: 10px;
     left: 50%;
-    width: 75px;
-    height: 100px;
+    width: clamp(40px, 6vw, 75px);
+    height: clamp(55px, 8vw, 100px);
     transform: translateX(-50%);
 }
 
@@ -59,31 +58,31 @@ body.dark {
     flex-direction: column;
     align-items: space-between;
     justify-content: space-between;
-    height: 400px;
-
-
-
+    height: clamp(200px, 35vh, 400px);
 }
 
 .underscore {
-    width: 100px;
-    margin: 10px;
+    width: clamp(50px, 8vw, 100px);
+    margin: clamp(4px, 1vw, 10px);
     display: inline-block;
-    height: 50px;
+    height: clamp(30px, 5vw, 50px);
     border-bottom: 5px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3rem;
+    font-size: clamp(1.5rem, 3vw, 3rem);
     opacity: 0;
     transform: scale(0.5);
 }
+
 .bar {
-    height: 30px;
+    height: clamp(18px, 2.5vw, 30px);
     border: 5px solid black;
     border-radius: 15px;
-     box-shadow: 7px 7px 0px #676363, 0 0 0 1px #bfb6b6;
+    box-shadow: 7px 7px 0px #676363, 0 0 0 1px #bfb6b6;
+    width: 80%;
 }
+
 #bar-inner {
     background: linear-gradient(rgb(217, 89, 89), rgb(174, 23, 23));
     height: 100%;
@@ -91,16 +90,20 @@ body.dark {
     border-radius: 8px;
     transition: 0.4s;
 }
+.hang-man {
+    height: 80%;
+}
+
 .underscore-dark {
-    width: 100px;
-    margin: 10px;
+    width: clamp(50px, 8vw, 100px);
+    margin: clamp(4px, 1vw, 10px);
     display: inline-block;
-    height: 50px;
+    height: clamp(30px, 5vw, 50px);
     border-bottom: 5px solid rgb(255, 255, 255);
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 3rem;
+    font-size: clamp(1.5rem, 3vw, 3rem);
     opacity: 0;
     transform: scale(0.5);
 }
@@ -118,12 +121,24 @@ body.dark {
     transition: transform 0.15s ease, box-shadow 0.15s ease;
     display: none;
 }
+.difficulty {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.difficulty button{
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 1px;
+}
 #new-game-btn {
     border: 4px solid black;
     border-radius: 10px;
     box-shadow: 7px 7px 0px #676363, 0 0 0 1px #bfb6b6;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
     display: none;
+    margin-right: 25px;
 }
 
 #submit-guess-btn {
@@ -145,18 +160,15 @@ body.dark {
     left: 50%;
     transform: translate(-50%, -50%);
     display: none;
-
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    width: 25%;
-
-    padding: 12px 16px;
+    gap: clamp(5px, 1vw, 10px);
+    width: clamp(200px, 25vw, 500px);
+    padding: clamp(8px, 1.2vw, 12px) clamp(10px, 1.5vw, 16px);
     border: 4px solid black;
     border-radius: 10px;
     background: white;
-
     box-shadow: 7px 7px 0px #676363, 0 0 0 1px #bfb6b6;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
@@ -170,8 +182,8 @@ body.dark {
     border: none;
     outline: none;
     display: none;
-    font-size: 1.5rem;
-    padding: 10px;
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    padding: clamp(5px, 1vw, 10px);
     width: 100%;
 }
 
@@ -184,7 +196,7 @@ body.dark {
     transition: transform 0.15s ease, box-shadow 0.15s ease;
     overflow: hidden;
     background-color: #fff;
-    font-size: 2rem;
+    font-size: clamp(1rem, 2vw, 2rem);
 }
 
 .letter-button-dark {
@@ -196,7 +208,7 @@ body.dark {
     transition: transform 0.15s ease, box-shadow 0.15s ease;
     overflow: hidden;
     background-color: #000000;
-    font-size: 2rem;
+    font-size: clamp(1rem, 2vw, 2rem);
     color: white;
 }
 
@@ -206,7 +218,7 @@ body.dark {
 }
 
 .shadow {
-    height: 60px;
+    height: clamp(30px, 5vw, 60px);
     background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.4) 50%, transparent 100%);
     border-radius: 50%;
     box-shadow: none;
@@ -217,7 +229,7 @@ body.dark {
 }
 
 .shadow-light {
-    height: 60px;
+    height: clamp(30px, 5vw, 60px);
     background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.75) 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
     border-radius: 50%;
     box-shadow: none;
@@ -228,12 +240,13 @@ body.dark {
 }
 
 .jimmy-img {
-    width: 274px;
-    height: 389px;
+    width: clamp(100px, 18vw, 200px);
+    height: clamp(150px, 27vw, 250px);
 }
-
-.little-jimmy {}
-
+#jimmy-text {
+    height: 1lh;
+    overflow: hidden;
+}
 .flash {
     position: fixed;
     top: 0;
@@ -243,11 +256,8 @@ body.dark {
     background-color: red;
     opacity: 0;
     pointer-events: none;
-    /* so it doesn’t block clicks */
     transition: opacity 0.2s ease;
-    /* smooth fade */
     z-index: 9999;
-    /* above everything */
 }
 
 .bounce-in {
@@ -255,7 +265,7 @@ body.dark {
 }
 
 .word-box {
-    height: 266px;
+    height: clamp(140px, 22vh, 266px);
     border: 4px solid black;
     border-radius: 10px;
     box-shadow: 10px 10px 0px #676363, 0 0 0 1px #bfb6b6;
@@ -263,45 +273,28 @@ body.dark {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: clamp(8px, 1.5vw, 20px);
 }
 
 .word-box:hover {
     transform: translate(-3px, -3px);
     box-shadow: 10px 10px 0px #111, 0 0 0 1px #111;
 }
+
 .hit-effect {
     animation: hitEffect 0.6s ease;
 }
+
 @keyframes shadowFadeColors {
-    0% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0.5;
-    }
-
-    100% {
-        opacity: 1;
-    }
+    0%   { opacity: 1; }
+    50%  { opacity: 0.5; }
+    100% { opacity: 1; }
 }
 
 @keyframes bounceIn {
-    0% {
-        transform: scale(0.5);
-        opacity: 0;
-    }
-
-    50% {
-        transform: scale(1.2);
-        opacity: 1;
-    }
-
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
+    0%   { transform: scale(0.5); opacity: 0; }
+    50%  { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1);   opacity: 1; }
 }
 
 .flash-red {
@@ -311,48 +304,24 @@ body.dark {
     width: 100vw;
     height: 100vh;
     pointer-events: none;
-    /* clicks pass through */
     z-index: 9999;
     animation: fadeRed 0.3s ease forwards;
-    /* run the animation once */
 }
 
 @keyframes fadeRed {
-    0% {
-        background-color: rgba(255, 0, 0, 0.5);
-    }
-
-    100% {
-        background-color: rgba(255, 0, 0, 0);
-    }
+    0%   { background-color: rgba(255, 0, 0, 0.5); }
+    100% { background-color: rgba(255, 0, 0, 0); }
 }
+
 @keyframes hitEffect {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  20% {
-    transform: scale(1.1);
-    opacity: 0.6;
-  }
-  40% {
-    transform: scale(1.05);
-    opacity: 1;
-  }
-  60% {
-    transform: scale(1.1);
-    opacity: 0.6;
-  }
-  80% {
-    transform: scale(1.05);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
+    0%   { transform: scale(1);    opacity: 1; }
+    20%  { transform: scale(1.1);  opacity: 0.6; }
+    40%  { transform: scale(1.05); opacity: 1; }
+    60%  { transform: scale(1.1);  opacity: 0.6; }
+    80%  { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1);    opacity: 1; }
 }
 
 .hit-animate {
-  animation: hitEffect 0.4s ease;
+    animation: hitEffect 0.4s ease;
 }
